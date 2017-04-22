@@ -1,0 +1,18 @@
+exports.home=function(req,res){
+  res.render('layout');
+};
+exports.regis=function(req,res){
+  res.render('regis');
+};
+exports.record=function(req,res){
+  res.render('record');
+};
+exports.absent=function(req,res){
+  res.render('absent');
+};
+exports.personal=function(req,res){
+  res.render('personal');
+};
+exports.behave=function(req,res){
+  res.render('behave');
+};
