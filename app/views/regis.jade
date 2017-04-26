@@ -1,5 +1,14 @@
 extends layout.jade
 block content
+  script.
+    document.getElementById('ch').onchange=function() {
+      if(this.selectedInd==='year'){
+      var showBox = document.getElementById('showBox');
+      showBox.style.hidden = 'block';
+      }else{
+        showBox.style.hidden = 'none';
+      }
+    }  
   style.
     a {color: black;margin: 5px; text-decoration: none;}
 
@@ -19,6 +28,16 @@ block content
     visibility: hidden;
     margin-top: -1px;
     }
+    .hiddengoi {
+      display: none;
+    }
+  script.
+    function show(e) {
+    var display = e.options[e.selectedIndex].value;
+    var showBox = document.getElementById('showBox');
+    if(display=="year") showBox.style.display = "block";
+    else showBox.style.display = "none";
+    }
   form(name='search', method='POST', action='registrar')
     table(style='border-collapse: collapse; ')
       tr
@@ -27,21 +46,34 @@ block content
       tr
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
-            select.w3-button(name='select')
+            select.w3-button(name='select', onchange='show(this)')
               option(selected='', disabled='')  All
               option(value='id')  Student ID
               option(value='name') Student Name
               option(value='assist')  Assistant Name
-              option(value='assist')  Year
-              option(value='assist')  GPAX
+              option(value='year')  Year
+              option(value='gpax')  GPAX
+        td  
+          .w3-dropdown-hover
+            select#showBox.w3-button.hiddengoi(name='year')
+              option(selected='', disabled='')  year
+              option(value='1')  1
+              option(value='2')  2
+              option(value='3')  3
+              option(value='4')  4
+              option(value='supersenior')  Super Senior
         td
           input(name='by',type='text',placeholder='Search...')
+        td(style='padding: 2px 2px')
+          .w3-dropdown-hover
+            select.w3-button(name='order')
+              option(selected='', disabled='')  Sort by..
+              option(value='d')  Decending
+              option(value='a')  Ascending    
         td
           input.w3-button(value='Search', type='submit', style='border:1px solid #ddd;')
         td(style='padding: 2px 2px')
           i.fa.fa-file-pdf-o(style='font-size:36px;color:red')
-
-
   h5.sub-header All
   .table-responsive
     table.table.table-striped
@@ -83,7 +115,7 @@ block content
           td sit
           td sit
           td
-            a(href='profile')
+            a(href='record')
               span.glyphicon.glyphicon-list-alt(aria-hidden='true')
           
           

@@ -19,6 +19,16 @@ block content
     visibility: hidden;
     margin-top: -1px;
     }
+    .hiddengoi {
+      display: none;
+    }
+  script.
+    function show(e) {
+    var display = e.options[e.selectedIndex].value;
+    var showBox = document.getElementById('showBox');
+    if(display=="type") showBox.style.display = "block";
+    else showBox.style.display = "none";
+    }
   form(name='search', method='POST', action='absent')
     table(style='border-collapse: collapse; ')
       tr
@@ -27,14 +37,15 @@ block content
       tr
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
-            select.w3-button(name='select')
+            select.w3-button(name='select',onchange='show(this)')
               option(selected='', disabled='')  All
               option(value='id')  Student ID
               option(value='name') Student Name
               option(value='assist')  Assistant Name
-        td(style='padding: 2px 2px')
+              option(value='type')  Type
+        td
           .w3-dropdown-hover
-            select.w3-button(name='select')
+            select#showBox.hiddengoi.w3-button(name='type')
               option(selected='', disabled='')  All
               option(value='probation')  Probation
               option(value='sick') Sick Leave
@@ -43,6 +54,12 @@ block content
               option(value='absent') Absent
         td
           input(name='by',type='text',placeholder='Search...')
+        td(style='padding: 2px 2px')
+          .w3-dropdown-hover
+            select.w3-button(name='order')
+              option(selected='', disabled='')  Sort by..
+              option(value='d')  Decending
+              option(value='a')  Ascending        
         td
           input.w3-button(value='Search', type='submit', style='border:1px solid #ddd;')
         td(style='padding: 2px 2px')
@@ -66,6 +83,6 @@ block content
           td ipsum
           td it's me
           td
-            a(href='profile')
+            a(href='miss')
               span.glyphicon.glyphicon-list-alt(aria-hidden='true')
           

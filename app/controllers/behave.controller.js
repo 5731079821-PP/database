@@ -1,3 +1,13 @@
+exports.search=function(req,res){
+  var by=req.body.by;
+  var select=req.body.select;
+  var order=req.body.order;
+  var type=req.body.type;
+  console.log('Search key: '+by);
+  console.log('Search choice: '+select);
+  console.log('Order choice: '+order);
+  console.log('Type choice: '+type);
+};
 exports.home=function(req,res){
   res.render('layout');
 };
@@ -12,4 +22,7 @@ exports.act=function(req,res){
 };
 exports.personal=function(req,res){
   res.render('personal');
+};
+exports.bscore=function(req,res){
+  res.render('bscore');
 };

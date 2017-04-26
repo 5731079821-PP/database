@@ -9,6 +9,7 @@ module.exports=function(app){
   app.get('/absent',act.absent);
   app.get('/personal',act.personal);
   app.get('/behave',act.behave);
+  app.post('/activity',act.search);
 
 
 };

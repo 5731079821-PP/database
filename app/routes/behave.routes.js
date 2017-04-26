@@ -9,6 +9,8 @@ module.exports=function(app){
   app.get('/absent',behave.absent);
   app.get('/activity',behave.act);
   app.get('/personal',behave.personal);
+  app.get('/bscore',behave.bscore);
+  app.post('/behave',behave.search);
 
 
 };

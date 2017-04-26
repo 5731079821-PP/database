@@ -19,6 +19,16 @@ block content
     visibility: hidden;
     margin-top: -1px;
     }
+    .hiddengoi {
+      display: none;
+    }
+  script.
+    function show(e) {
+    var display = e.options[e.selectedIndex].value;
+    var showBox = document.getElementById('showBox');
+    if(display=="date") showBox.style.display = "block";
+    else showBox.style.display = "none";
+    }
   form(name='search', method='POST', action='activity')
     table(style='border-collapse: collapse; ')
       tr
@@ -33,15 +43,25 @@ block content
               option(value='nonacademic') Non Academic
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
-            select.w3-button(name='select')
+            select.w3-button(name='select',onchange='show(this)')
               option(selected='', disabled='')  All
               option(value='id')  Student ID
               option(value='name') Student Name
               option(value='assist')  Assistant Name
               option(value='activity')  Activity Name
               option(value='projectAssist')  Project's Assistant Name
+              option(value='date')  Date
+        td
+          .w3-dropdown-hover
+            input#showBox.hiddengoi(name='date',type='date')
         td
           input(name='by',type='text',placeholder='Search...')
+        td(style='padding: 2px 2px')
+          .w3-dropdown-hover
+            select.w3-button(name='order')
+              option(selected='', disabled='')  Sort by..
+              option(value='d')  Decending
+              option(value='a')  Ascending    
         td
           input.w3-button(value='Search', type='submit', style='border:1px solid #ddd;')
         td(style='padding: 2px 2px')

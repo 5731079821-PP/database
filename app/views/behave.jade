@@ -19,6 +19,17 @@ block content
     visibility: hidden;
     margin-top: -1px;
     }
+    .hiddengoi {
+      display: none;
+    }
+    
+  script.
+    function show(e) {
+    var display = e.options[e.selectedIndex].value;
+    var showBox = document.getElementById('showBox');
+    if(display=="type") showBox.style.display = "block";
+      else showBox.style.display = "none";
+    }  
   form(name='search', method='POST', action='behave')
     table(style='border-collapse: collapse; ')
       tr
@@ -27,16 +38,31 @@ block content
       tr
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
-            select.w3-button(name='select')
+            select.w3-button(name='select',onchange='show(e)')
               option(selected='', disabled='')  All
               option(value='id')  Student ID
               option(value='name') Student Name
               option(value='assist')  Assistant Name
               option(value='score')  Range Score
               option(value='type')  Type
+        td
+          .w3-dropdown-hover
+            select#showBox.hiddengoi.w3-button(name='type')
+              option(selected='', disabled='')  All
+              option(value='probation')  Probation
+              option(value='sick') Sick Leave
+              option(value='exchange')  Exchange Student
+              option(value='drop')  Drop
+              option(value='absent') Absent
               
         td
           input(name='by',type='text',placeholder='Search...')
+        td(style='padding: 2px 2px')
+          .w3-dropdown-hover
+            select.w3-button(name='order')
+              option(selected='', disabled='')  Sort by..
+              option(value='d')  Decending
+              option(value='a')  Ascending    
         td
           input.w3-button(value='Search', type='submit', style='border:1px solid #ddd;')
         td(style='padding: 2px 2px')
@@ -62,6 +88,6 @@ block content
           td 100
           td GPAX
           td
-            a(href='profile')
+            a(href='bscore')
               span.glyphicon.glyphicon-list-alt(aria-hidden='true')
         

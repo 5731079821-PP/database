@@ -1,0 +1,99 @@
+doctype
+html
+  title login as an executive
+  link(rel='icon', href='/img/head.png')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/css/w3.css')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet', type='text/css', href='/css/app.css')
+  link(rel='stylesheet', type='text/css', href='/css/ourcss.css')
+  link(href='https://fonts.googleapis.com/css?family=Mitr', rel='stylesheet')
+  body
+    div(style='padding: 10px;')  
+    .col-sm-2
+      button.w3-button(style='border:1px solid #aaa; border-radius: 25px;', onclick="window.location.href='behave'")
+        i.fa.fa-angle-left
+        |  back
+    .col-sm-9(style='font-size: 35px; text-align: center;') Behavior Score Record
+    .col-sm-1
+      a(href='files/basicInfo_adviser.pdf')
+        i.fa.fa-file-pdf-o(style='font-size:40px; color:red;')
+    br
+    div(style='padding: 10px;')  
+    // FILTER BOX
+    form(action='')
+      table(style='border-collapse: collapse; ', align='center')
+        tr
+          td(colspan='4', style='padding: 0px; text-align: left; ')
+            span.w3-margin-right Filter:
+        tr
+          td(style='padding: 2px 2px')
+            .w3-dropdown-hover
+              select.w3-button(name='status')
+                option(selected='', disabled='')  status 
+                option(value='all')  ALL 
+                option(value='normal')  NORMAL 
+                option(value='morethan4yr') not graduated as plan
+                option(value='probation')  probation 
+                option(value='sickleave')  sick leave 
+                option(value='exchange')  exchange student 
+                option(value='drop')  drop 
+          td(style='padding: 2px 2px')
+            .w3-dropdown-hover
+              select.w3-button(name='year')
+                option(selected='', disabled='')  year 
+                option(value='1')  1 
+                option(value='2')  2 
+                option(value='3')  3 
+                option(value='4')  4 
+                option(value='superjunior')  super junior 
+          td
+            input.w3-button(value='apply', type='submit', style='border:1px solid #ddd;')
+          td(style='padding: 2px 2px')
+            i.fa.fa-file-pdf-o(style='font-size:36px;color:red')
+            // <a href="files/forexecutive.pdf"><i class="fa fa-file-pdf-o" style="font-size:36px;color:red"></i></a>
+      // TABLE
+      div(style='margin-top: 20px;')
+        table(style='border-collapse: collapse; border: 1px solid #000;', align='center')
+          tr(style='background-color: rgb(255,210,227); border: 1px solid #000; border-bottom-color: white')
+            td(rowspan='2') student id
+            td(rowspan='2') number of students 
+            td(rowspan='2') average GPAX
+            td(rowspan='2') average Behavior Score
+            td(colspan='3', style='padding: 8px 13px;')  number of Activity 
+          tr.try(style='background-color: rgb(255,210,227); border: 1px solid #000;border-bottom-color: white; padding: 5px;')
+            td(style='padding: 5px 13px;') Academic
+            td(style='padding: 5px 13px;') non-Academic
+            td(style='padding: 5px 13px;') total
+          tr.view
+            td  59 
+            td  150 
+            td  3.21 
+            td  89 
+            td  7 
+            td  16 
+            td  23 
+          tr.view
+            td  58 
+            td  150 
+            td  3.21 
+            td  89 
+            td  7 
+            td  16 
+            td  23 
+          tr.view
+            td  57 
+            td  150 
+            td  3.21 
+            td  89 
+            td  7 
+            td  16 
+            td  23 
+          tr.view
+            td  56 
+            td  150 
+            td  3.21 
+            td  89 
+            td  7 
+            td  16 
+            td  23 
