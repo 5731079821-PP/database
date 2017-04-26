@@ -6,7 +6,6 @@ module.exports=function(app){
   //Nav
   app.get('/overview',personal.home);
   app.get('/registrar',personal.regis);
-  app.get('/record',personal.record);
   app.get('/absent',personal.absent);
   app.get('/activity',personal.act);
   app.get('/behave',personal.behave);

@@ -4,9 +4,6 @@ exports.home=function(req,res){
 exports.personal=function(req,res){
   res.render('personal');
 };
-exports.record=function(req,res){
-  res.render('record');
-};
 exports.absent=function(req,res){
   res.render('absent');
 };

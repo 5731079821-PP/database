@@ -16,11 +16,11 @@ html
 			.content
 				.container
 					.form
-						p = sms
-						form.login-form(name='login',method='POST',action='home')
+						p(style='color:red') #{sms}
+						form.login-form(name='login',method='POST',action='overview')
 							input(name='usr', type='text', placeholder='username', required='')
-							input(name='pass',type='password', placeholder='password',required='')
+							input(name='pass',type='text', placeholder='password',required='')
 							button(type='submit') login
 							p.message
 								| Not registered?
-								a(href='createAccount')    Create an account
+								a(href='signin')    Create an account

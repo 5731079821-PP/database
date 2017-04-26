@@ -4,9 +4,8 @@ var connection=mysql.createConnection({
   port: '3306',
   user:'root',
   password:'12345',
-  database:'db'
+  database:'regchula'
 });
-
 connection.connect(function(error){
   if(!!error){
     console.log(error);

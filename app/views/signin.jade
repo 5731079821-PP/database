@@ -16,10 +16,24 @@ html
 			.content
 				.container
 					.form
+						p(style='color:red') #{sms}
 						form.login-form(name='login', method='POST', action='signin')
 							input(name='usr', type='text', placeholder='username', required='')
-							input(name='pass', type='password', placeholder='password', required='')
+							input(name='pass', type='text', placeholder='password', required='')
+							input(name='inID', type='text', placeholder='instructor ID', required='')
+							table(style='border-collapse: collapse; ')
+								tr
+									td(colspan='4', style='padding: 0px; text-align: left; ')
+										span.w3-margin-right Status:
+								tr
+									td(style='padding: 15px 15px 15px')
+										input(type='radio', name='status' value='instructor')
+										| Instructor					         
+									td(style='padding: 15px 15px 15px;')
+										input(type='radio', name='status' value='executive')
+										| Executive
 							button(type='submit') singin
 							p.message
 								| Already registered?
 								a(href='login')    Login
+							

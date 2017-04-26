@@ -1,24 +1,50 @@
 var connection=require('../../sql');
-exports.render=function(req,res){
+exports.login=function(req,res){
   res.render('login',{
-
   });
-};
-exports.create=function(req,res){
-  res.render('signin');
 };
 exports.signin=function(req,res){
-  connection.query('SELECT pwd FROM login WHERE usr = ?',req.body.usr,function(err,result){
-  if(result.length){
-    console.log('dupe');
-    return;
-  }else{
-      var data  = {usr: req.body.usr, pwd: req.body.pass};
-      connection.query('INSERT INTO login SET ?', data, function(err, result) {
-
-      });
-        res.render('layout');
+  res.render('signin');//render signin.jade
+};
+exports.create=function(req,res){
+  console.log(req.body.usr);
+  console.log(req.body.pwd);
+  console.log(req.body.inID);
+  console.log(req.body.status);
+  connection.query('SELECT password FROM login WHERE instructorId = ?',req.body.inID,function(err,result){
+  if(!result.length){//if already register -> warning and stay in signin.jade
+    var data  = {
+      user: req.body.usr,
+      password: req.body.pass,
+      status:req.body.status,
+      instructorId:req.body.inID};
+    connection.query('INSERT INTO login SET ?', data, function(err, result) {
+      console.log(result);
+    });
+      res.render('layout');//render layout.jade
+  }else{//if new user->insert data into login table
+        res.render('signin',{
+          sms:'You already have an account!'
+        });
   }
   });
-
+};
+exports.authen=function(req,res){
+  var data  = {
+    user: req.body.usr,
+    password: req.body.pass,
+    status:req.body.status,
+    instructorId:req.body.inID};
+  connection.query('SELECT password FROM login WHERE user = ?', data.user,function(err,result){
+    console.log('goi');
+    if(!result.length||result[0].password!==data.password){//if password incorrect
+        console.log(result.password);
+        console.log(data.password);
+        res.render('login',{
+          sms: 'Incorrect Username or Password!'
+        });
+    }else{
+      res.render('layout'); //render layout.jade /overview path
+    }
+  });
 };

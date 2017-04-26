@@ -19,7 +19,7 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Moomin
+          a.navbar-brand(href='overview') Moomin
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
@@ -45,8 +45,6 @@ html(lang='en')
             li
               a(href='registrar') Registrar Information
             li
-              a(href='record') Academic Reccord
-            li
               a(href='absent') Leave of Absent
             li
               a(href='activity') Activity
@@ -54,5 +52,5 @@ html(lang='en')
               a(href='behave') Behavior Score
 
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-          h1.page-header want to change
+          h1.page-header #{subtitle}
           block content
