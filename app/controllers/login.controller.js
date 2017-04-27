@@ -31,17 +31,18 @@ exports.create=function(req,res){
 };
 exports.authen=function(req,res){
   var data  = {
-    user: req.body.usr,
+    instructorId:req.body.inID,
     password: req.body.pass,
-    status:req.body.status,
-    instructorId:req.body.inID};
-  connection.query('SELECT password FROM login WHERE user = ?', data.user,function(err,result){
-    console.log('goi');
+    status:req.body.status
+    };
+  req.session.inID=data.instructorId;
+  connection.query('SELECT password FROM login WHERE instructorId = ?', data.instructorId,function(err,result){
+    //console.log('goi');
     if(!result.length||result[0].password!==data.password){//if password incorrect
         console.log(result.password);
         console.log(data.password);
         res.render('login',{
-          sms: 'Incorrect Username or Password!'
+          sms: 'Incorrect Instructor ID or Password!'
         });
     }else{
       res.render('layout'); //render layout.jade /overview path

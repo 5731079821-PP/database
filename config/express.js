@@ -3,6 +3,7 @@ var bodyParser=require('body-parser');
 var compression=require('compression');
 var morgan=require('morgan');
 var validator=require('express-validator');
+var session=require('express-session');
 
 module.exports=function(){
   var app=express();
@@ -16,6 +17,13 @@ module.exports=function(){
   }));
   app.use(bodyParser.json());
   app.use(validator()); //must be right after bodyParser
+  app.use(session({
+    secret:'conan',
+    saveUninitialized:false,
+    resave:false
+  }));
+
+
   app.set('views','./app/views');
   app.set('view engine','jade');
   require('../app/routes/login.routes')(app);//at runtime
