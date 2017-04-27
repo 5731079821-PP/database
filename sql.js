@@ -1,10 +1,9 @@
 var mysql=require('mysql');
 var connection=mysql.createConnection({
-  host:'127.0.0.1',
-  port: '3306',
+  host:'localhost',
   user:'root',
-  password:'12345',
-  database:'regchula'
+  password:'',
+  database:'databaseproject'
 });
 connection.connect(function(error){
   if(!!error){

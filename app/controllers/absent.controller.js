@@ -7,6 +7,12 @@ exports.search=function(req,res){
   console.log('Type choice: '+type);
   console.log('Search choice: '+select);
   console.log('Order choice: '+order);
+
+  connection.query('select sid, fname, lname, instructor.name from student inner join instructor on student.instructorid = instructor.instructorId', function(err, rows, fields){
+    res.render('allabsent', {
+      list : rows
+    });
+  });
 };
 exports.home=function(req,res){
   res.render('layout');

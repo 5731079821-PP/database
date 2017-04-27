@@ -9,8 +9,8 @@ module.exports=function(app){
   app.get('/absent',personal.absent);
   app.get('/activity',personal.act);
   app.get('/behave',personal.behave);
-
-  app.post('/personal',personal.search);
+  app.get('/allpersonal', personal.rend);
+  app.post('/allpersonal',personal.search);
   app.get('/profile',personal.profile);
 
 

@@ -77,7 +77,7 @@ block content
           th Student ID
           th Student Name
           th Name
-          th Profile
+          th GPAX
       tbody
         tr
           td 1,001
@@ -87,4 +87,13 @@ block content
             a(href='profile')
               span.glyphicon.glyphicon-list-alt(aria-hidden='true')
           td sit
-        
+        each stu in student
+          tr
+            td 
+            td=stu.sid
+            td=stu.fname
+            td=stu.lname
+            td 
+              a(href="#{'profile?id='+stu.sid}") 
+                span.glyphicon.glyphicon-list-alt
+            td=stu.GPAX
