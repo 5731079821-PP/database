@@ -8,24 +8,7 @@ exports.search=function(req,res){
   console.log('Order choice: '+order);
   console.log('Type choice: '+type);
 };
-exports.home=function(req,res){
-  res.render('layout',{
-    User: 'ID: '+req.session.inID+'  ',
-    subtitle: 'Overview'
-  });
-};
-exports.regis=function(req,res){
-  res.render('regis');
-};
-exports.absent=function(req,res){
-  res.render('absent');
-};
-exports.act=function(req,res){
-  res.render('act');
-};
-exports.personal=function(req,res){
-  res.render('personal');
-};
-exports.bscore=function(req,res){
-  res.render('bscore');
+
+exports.rend=function(req,res){
+  
 };

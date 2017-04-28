@@ -4,11 +4,7 @@ module.exports=function(app){
 //  app.get('/logout',personal.logout);
 
   //Nav
-  app.get('/overview',act.home);
-  app.get('/registrar',act.regis);
-  app.get('/absent',act.absent);
-  app.get('/personal',act.personal);
-  app.get('/behave',act.behave);
+  app.get('/activity', act.rend);
   app.post('/activity',act.search);
 
 

@@ -1,5 +1,3 @@
-var connection = require('../../sql');
-
 exports.search=function(req,res){
   var by=req.body.by;         //search
   var select=req.body.select; //filter dropdown
@@ -50,6 +48,7 @@ exports.search=function(req,res){
     }
   });
 };
+
 exports.profile=function(req,res){
   var id = req.param('id');
   console.log(id);
@@ -66,25 +65,6 @@ exports.profile=function(req,res){
       });
     }
   });
-};
-exports.home=function(req,res){
-  res.render('layout',{
-    User: 'ID: '+req.session.inID+'  ',
-    subtitle: 'Overview'
-  });
-};
-exports.regis=function(req,res){
-
-  res.render('regis');
-};
-exports.absent=function(req,res){
-  res.render('absent');
-};
-exports.act=function(req,res){
-  res.render('act');
-};
-exports.behave=function(req,res){
-  res.render('behave');
 };
 
 exports.rend=function(req,res){

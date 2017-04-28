@@ -16,15 +16,6 @@ exports.home=function(req,res){
     subtitle: 'Overview'
   });
 };
-exports.regis=function(req,res){
-  res.render('regis');
-};
-exports.absent=function(req,res){
-  res.render('absent');
-};
-exports.personal=function(req,res){
-  res.render('personal');
-};
-exports.behave=function(req,res){
-  res.render('behave');
+exports.rend=function(req,res){
+
 };

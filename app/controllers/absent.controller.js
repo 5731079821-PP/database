@@ -9,10 +9,17 @@ exports.search=function(req,res){
   console.log('Order choice: '+order);
 
   connection.query('select sid, fname, lname, instructor.name from student inner join instructor on student.instructorid = instructor.instructorId', function(err, rows, fields){
-    res.render('allabsent', {
-      list : rows
-    });
-  });
+    if(err) console.error('QUERY ERROR : absent table');
+   console.log('query complete');
+   var errormsg='';
+   if(rows == ''){
+       errormsg+= 'no results';
+   }
+   res.render('allabsent', {
+     student : rows,
+     errormsg : errormsg
+   });
+ });
 };
 exports.home=function(req,res){
   res.render('layout',{

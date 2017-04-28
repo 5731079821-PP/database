@@ -4,12 +4,7 @@ module.exports=function(app){
 //  app.get('/logout',personal.logout);
 
   //Nav
-  app.get('/overview',behave.home);
-  app.get('/registrar',behave.regis);
-  app.get('/absent',behave.absent);
-  app.get('/activity',behave.act);
-  app.get('/personal',behave.personal);
-  app.get('/bscore',behave.bscore);
+  app.get('/behave',behave.rend);
   app.post('/behave',behave.search);
 
 

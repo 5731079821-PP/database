@@ -43,7 +43,7 @@ html
           td.word คณะ
           td.word(colspan='2') #{indiv.facultyName}
           td.word ภาควิชา
-          td.word(colspan='2') วิศวกรรมคอมพิวเตอร์
+          td.word(colspan='2') #{indiv.departmentName}
         tr
           td.word สัญชาติ
           td.word #{indiv.nationality}
@@ -78,6 +78,7 @@ html
         tr
           td.word ผู้ปกครอง
           td.word(colspan='5') #{indiv.parent}
+        //- there is no data in our database and ER diagram so i cut it out na ja
         //- tr
         //-   td.word เบอร์โทรศัพท์
         //-   td.word(colspan='2') 0XX-XX X-XXXX
