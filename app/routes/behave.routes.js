@@ -6,6 +6,5 @@ module.exports=function(app){
   //Nav
   app.get('/behave',behave.rend);
   app.post('/behave',behave.search);
-
-
+  app.get('/bscore',behave.indivScore);
 };

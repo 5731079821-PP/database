@@ -1,3 +1,5 @@
+var connection = require('../../sql');
+
 exports.search=function(req,res){
   var by=req.body.by;
   var select=req.body.select;
@@ -17,5 +19,13 @@ exports.home=function(req,res){
   });
 };
 exports.rend=function(req,res){
-
+  connection.query('select a.name, a.type, a.prize, p.sid, a.assistant, a.date from activity a inner join paticipate p on a.activityid = p.activityId', function(err, rows){
+    if(err) console.error('QUERY ERROR : activity table');
+  })
+  var errormsg='';
+  if(rows=='') errormsg + 'NO RESULTS';
+  res.rend('act',{
+    student : rows
+    // errormsg = errormsg
+  });
 };
