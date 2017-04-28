@@ -1,3 +1,5 @@
+var connection = require('../../sql');
+
 exports.search=function(req,res){
   var by=req.body.by;         //search
   var select=req.body.select; //filter dropdown

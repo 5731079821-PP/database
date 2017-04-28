@@ -29,7 +29,7 @@ block content
       if(display=="course") showBox.style.display = "block";
       else showBox.style.display = "none";
     } 
-  form(name='search', method='POST', action='allpersonal')
+  form(name='search', method='POST', action='absent')
     table(style='border-collapse: collapse; ')
       tr
         td(colspan='4', style='padding: 0px; text-align: left; ')
@@ -38,11 +38,11 @@ block content
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
             select.w3-button(name='select',onchange='show(this)')
-              option(value='all')  All
-              option(value='sid')  Student ID
+              option(selected='', disabled='')  All
+              option(value='id')  Student ID
               option(value='name') Student Name
-              option(selected='', value='assist')  Assistant Name
-              option(value='course')  Course Name
+              option(value='assist')  Assistant Name
+              option(value='type')  Type
         td
           .w3-dropdown-hover
             select#showBox.hiddengoi.w3-button(name='type')

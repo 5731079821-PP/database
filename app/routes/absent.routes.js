@@ -5,7 +5,7 @@ module.exports=function(app){
 
   //Nav
   app.post('/absent',absent.search);
-  app.get('/absent', absent.rend);
+  app.get('/absent',absent.rend);
 
 
 };
