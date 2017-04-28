@@ -5,4 +5,5 @@ module.exports=function(app){
   app.post('/signin',login.create); //render login.jadde
   app.get('/signin',login.signin);//do sign in process
   app.get('/',login.login);//render login.jade
+  app.get('/logout',login.logout);//render login.jade
 };

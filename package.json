@@ -11,6 +11,9 @@
     "body-parser": "~1.13.0",
     "jade" : "~1.11.0",
     "express-validator" : "~2.14.0",
-    "express-session": "^1.7.6"
+    "express-session": "^1.7.6",
+    "passport": "latest",
+    "passport-local": "latest",
+    "cookie-parser": "~1.4.3"
   }
 }

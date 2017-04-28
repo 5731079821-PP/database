@@ -30,13 +30,15 @@ exports.create=function(req,res){
   });
 };
 exports.authen=function(req,res){
+
   var data  = {
     instructorId:req.body.inID,
     password: req.body.pass,
     status:req.body.status
     };
+  req.session.save();  
   req.session.inID=data.instructorId;
-  connection.query('SELECT password FROM login WHERE instructorId = ?', data.instructorId,function(err,result){
+  connection.query('SELECT password, user FROM login WHERE instructorId = ?', data.instructorId,function(err,result){
     //console.log('goi');
     if(!result.length||result[0].password!==data.password){//if password incorrect
         console.log(result.password);
@@ -45,7 +47,14 @@ exports.authen=function(req,res){
           sms: 'Incorrect Instructor ID or Password!'
         });
     }else{
-      res.render('layout'); //render layout.jade /overview path
+      res.render('layout',{
+        User: 'ID: '+req.session.inID+'  ',
+        subtitle: 'Overview'
+      }); //render layout.jade /overview path
     }
   });
+};
+exports.logout=function(req,res){
+  req.session.destroy();
+  res.render('login');//render signin.jade
 };

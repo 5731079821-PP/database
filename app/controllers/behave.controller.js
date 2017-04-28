@@ -9,7 +9,10 @@ exports.search=function(req,res){
   console.log('Type choice: '+type);
 };
 exports.home=function(req,res){
-  res.render('layout');
+  res.render('layout',{
+    User: 'ID: '+req.session.inID+'  ',
+    subtitle: 'Overview'
+  });
 };
 exports.regis=function(req,res){
   res.render('regis');

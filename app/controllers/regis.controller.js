@@ -7,10 +7,13 @@ exports.search=function(req,res){
   console.log('Search choice: '+select);
   console.log('Order choice: '+order);
   console.log('Order choice: '+year);
-
 };
 exports.home=function(req,res){
-  res.render('layout');
+  console.log('try'+req.session.inID);
+  res.render('layout',{
+    User: 'ID: '+req.session.inID+'  ',
+    subtitle: 'Overview'
+  });
 };
 exports.personal=function(req,res){
   res.render('personal');

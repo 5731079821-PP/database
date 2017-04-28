@@ -1,6 +1,9 @@
 var connection=require('../../sql');
 exports.overview=function(req,res){
-  res.render('layout');
+  res.render('layout',{
+    User: 'ID: '+req.session.inID+'  ',
+    subtitle: 'Overview'
+  });
 };
 
 exports.personal=function(req,res){
