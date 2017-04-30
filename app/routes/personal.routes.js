@@ -9,5 +9,4 @@ module.exports=function(app){
   app.post('/allpersonal',personal.search);
   app.get('/profile',personal.profile);
 
-
 };

@@ -40,7 +40,7 @@ block content
             select.w3-button(name='type')
               option(selected='', disabled='')  All
               option(value='academic')  Academic
-              option(value='nonacademic') Non Academic
+              option(value='non academic') Non Academic
         td(style='padding: 2px 2px')
           .w3-dropdown-hover
             select.w3-button(name='select',onchange='show(this)')
@@ -78,17 +78,11 @@ block content
           th Type
           th Prize
           th Participant's ID
+          th Student Name
           th Project Assistant Name
           th Date
       tbody
-        tr
-          td 1
-          td Lorem
-          td Non Ac
-          td first
-          td 33333333333
-          td It's me
-          td sunday
+        
         each stu in student
           tr
             td
@@ -96,5 +90,7 @@ block content
             td=stu.type
             td=stu.prize
             td=stu.sid 
+            td=stu.fname +' '+stu.lname
             td=stu.assistant
             td=stu.date
+  h3(style='color:#ff0000; text-align:center;') #{errormsg}

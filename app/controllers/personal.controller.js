@@ -54,7 +54,7 @@ exports.search=function(req,res){
   var row = [];
 
   var return_data = {};
-
+  var errormsg = '';
   async.parallel([
     function(parallel_done){
       pool.query(query1, {}, function(err, rows){
@@ -66,6 +66,7 @@ exports.search=function(req,res){
     function(parallel_done){
       pool.query(query, {}, function(err, rows){
         if(err) return parallel_done(err);
+        if(rows == '') errormsg = 'no results';
         return_data.table2 = rows;
         parallel_done();
       });
@@ -78,7 +79,8 @@ exports.search=function(req,res){
 
     res.render('allpersonal',{
       student: rows.table2,
-      subj: rows.table1
+      subj: rows.table1,
+      errormsg: errormsg
     })
   });
 };
@@ -108,7 +110,7 @@ exports.rend=function(req,res){
   var row = [];
 
   var return_data = {};
-
+  var errormsg='';
   async.parallel([
     function(parallel_done){
       pool.query(query1, {}, function(err, rows){
@@ -120,6 +122,7 @@ exports.rend=function(req,res){
     function(parallel_done){
       pool.query(query2, {}, function(err, rows){
         if(err) return parallel_done(err);
+        if(rows=='') errormsg+='no results';
         return_data.table2 = rows;
         parallel_done();
       });
@@ -132,7 +135,8 @@ exports.rend=function(req,res){
 
     res.render('allpersonal',{
       student: rows.table2,
-      subj: rows.table1
+      subj: rows.table1,
+      errormsg: errormsg
     })
   });
 };

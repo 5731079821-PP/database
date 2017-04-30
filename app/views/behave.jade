@@ -44,16 +44,17 @@ block content
               option(value='name') Student Name
               option(value='assist')  Assistant Name
               option(value='score')  Range Score
-              option(value='type')  Type
+              //- option(value='type')  Type
         td
-          .w3-dropdown-hover
-            select#showBox.hiddengoi.w3-button(name='type')
-              option(selected='', disabled='')  All
-              option(value='probation')  Probation
-              option(value='sick') Sick Leave
-              option(value='exchange')  Exchange Student
-              option(value='drop')  Drop
-              option(value='absent') Absent
+          #showBox.hiddengoi
+            .w3-dropdown-hover
+              select.w3-button(name='type')
+                option(selected='', disabled='')  All
+                option(value='probation')  Probation
+                option(value='sick') Sick Leave
+                option(value='exchange')  Exchange Student
+                option(value='drop')  Drop
+                option(value='absent') Absent
               
         td
           input(name='by',type='text',placeholder='Search...')

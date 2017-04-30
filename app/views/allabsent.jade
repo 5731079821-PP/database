@@ -26,9 +26,9 @@ block content
     function show(e) {
       var display = e.options[e.selectedIndex].value;
       var showBox = document.getElementById('showBox');
-      if(display=="course") showBox.style.display = "block";
+      if(display=="type") showBox.style.display = "block";
       else showBox.style.display = "none";
-    } 
+    }
   form(name='search', method='POST', action='absent')
     table(style='border-collapse: collapse; ')
       tr
@@ -44,14 +44,15 @@ block content
               option(value='assist')  Assistant Name
               option(value='type')  Type
         td
-          .w3-dropdown-hover
-            select#showBox.hiddengoi.w3-button(name='type')
-              option(selected='', disabled='')  All
-              option(value='probation')  Probation
-              option(value='sick') Sick Leave
-              option(value='exchange')  Exchange Student
-              option(value='drop')  Drop
-              option(value='absent') Absent            
+          #showBox.hiddengoi
+            .w3-dropdown-hover
+              select.w3-button(name='type')
+                option(selected='', disabled='')  All
+                option(value='probation')  Probation
+                option(value='sick') Sick Leave
+                option(value='exchange')  Exchange Student
+                option(value='drop')  Drop
+                option(value='absent') Absent
         td
           input(name='by',type='text',placeholder='Search...')
         td(style='padding: 2px 2px')
@@ -59,7 +60,7 @@ block content
             select.w3-button(name='order')
               option(selected='', disabled='')  Sort by..
               option(value='d')  Decending
-              option(value='a')  Ascending                    
+              option(value='a')  Ascending        
         td
           input.w3-button(value='Search', type='submit', style='border:1px solid #ddd;')
         td(style='padding: 2px 2px')
@@ -77,14 +78,14 @@ block content
           th Assistant Name
           th History
       tbody
-        //- each stu in student
-        //-   tr
-        //-     td 
-        //-     td=stu.sid
-        //-     td=stu.fname+' '+stu.lname
-        //-     td=stu.name
-        //-     td 
-        //-       a(href="#{'profile?id='+stu.sid}") 
-        //-         span.glyphicon.glyphicon-list-alt
-            
-    h3(style='color:#ff0000; text-align:center;') #{errormsg}
+        each stu in student
+          tr
+            td
+            td=stu.sid
+            td=stu.fname+' '+stu.lname
+            td=stu.name
+            td 
+              a(href="#{'miss?id='+stu.sid}") 
+                span.glyphicon.glyphicon-list-alt
+  h3(style='color:#ff0000; text-align:center;') #{errormsg}
+  
