@@ -19,13 +19,15 @@ exports.home=function(req,res){
   });
 };
 exports.rend=function(req,res){
-  connection.query('select a.name, a.type, a.prize, p.sid, a.assistant, a.date from activity a inner join paticipate p on a.activityid = p.activityId', function(err, rows){
+  connection.query('select a.name, a.type, a.prize, p.sid, a.assistant, DATE_FORMAT(a.date,"%b %e, %Y") as date from activity a inner join paticipate p on a.activityid = p.activityId'
+  , function(err, rows){
     if(err) console.error('QUERY ERROR : activity table');
-  })
-  var errormsg='';
-  if(rows=='') errormsg + 'NO RESULTS';
-  res.rend('act',{
-    student : rows
-    // errormsg = errormsg
+    var errormsg='';
+    if(rows=='') errormsg + 'NO RESULTS';
+    res.render('act',{
+      student : rows
+      // errormsg = errormsg
+    });
   });
+  // res.render('act');
 };

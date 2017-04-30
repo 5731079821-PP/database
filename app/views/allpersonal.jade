@@ -29,9 +29,7 @@ block content
       if(display=="course") showBox.style.display = "block";
       else showBox.style.display = "none";
     } 
-    //- $('#select').click(function({
-    //-   $.get('')
-    //- }))
+
   form(name='search', method='POST', action='allpersonal')
     table(style='border-collapse: collapse; ')
       tr
@@ -51,10 +49,8 @@ block content
             .w3-dropdown-hover
               select.w3-button(name='course')
                 option(selected='', disabled='')  Course
-                option(value='2110318')  318
-                option(value='2110422')  422
-                option(value='2110471')  417
-                option(value='5500308')  5500308
+                each sub in subj  
+                  option(value='#{sub.courseId}')=sub.name
             
         td
           input(name='by',type='text',placeholder='Search...')

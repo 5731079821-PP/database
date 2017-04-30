@@ -29,6 +29,29 @@ block content
     if(display=="course") showBox.style.display = "block";
     else showBox.style.display = "none";
     }  
+    $(function(){
+      var val=$('#select').html();
+      if(val != 'course') return;
+      $.ajax({
+        url: '/personal/course',
+        type: 'post',
+        data: {
+          code: ""
+        },
+        success: function(result){
+          console.log(result);
+          if(result.nodes.length != 0){
+            console.log(result);
+          }else{
+            console.log('no data of the course');
+          }
+        }
+        error: function(err){
+          console.error(err);
+        
+        }
+      });
+    })
   form(name='search', method='POST', action='personal')
     table(style='border-collapse: collapse; ')
       tr
@@ -87,7 +110,7 @@ block content
             a(href='profile')
               span.glyphicon.glyphicon-list-alt(aria-hidden='true')
           td sit
-        each stu in student
+        each stu in table2
           tr
             td 
             td=stu.sid

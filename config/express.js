@@ -39,6 +39,7 @@ module.exports=function(){
   require('../app/routes/act.routes')(app);
   require('../app/routes/regis.routes')(app);
   require('../app/routes/behave.routes')(app);
+  require('../app/routes/index.routes')(app);
   app.use(express.static('./public')); //order imp
   return app;
 }

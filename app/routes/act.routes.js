@@ -6,6 +6,4 @@ module.exports=function(app){
   //Nav
   app.get('/activity', act.rend);
   app.post('/activity',act.search);
-
-
 };

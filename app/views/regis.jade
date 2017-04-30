@@ -10,6 +10,10 @@ block content
       }
     }  
   style.
+    sup {
+      vertical-align: super;
+      font-size: smaller;
+    }
     a {color: black;margin: 5px; text-decoration: none;}
 
     .dropdown-menu li:hover .sub-menu {
@@ -86,23 +90,39 @@ block content
           th(style='text-align:center',rowspan='2') Student Name
           th(style='text-align:center',rowspan='2') Student ID
           th(style='text-align:center',rowspan='2') GPAX
-          th(style='text-align:center',colspan='3') Year 1
-          th(style='text-align:center',colspan='3') Year 2
-          th(style='text-align:center',colspan='3') Year 3
-          th(style='text-align:center',colspan='3') Year 4
+          th(style='text-align:center',colspan='3') 1
+            sup st
+            | Year 
+          th(style='text-align:center',colspan='3') 2
+            sup nd
+            | Year 
+          th(style='text-align:center',colspan='3') 3
+            sup th
+            | Year 
+          th(style='text-align:center',colspan='3') 4
+            sup th
+            | Year 
           th(style='text-align:center',rowspan='3') Records
         tr
-          th Sem 1
-          th Sem 2
+          th 1
+            sup st
+          th 2
+            sup nd
           th Summer
-          th Sem 1
-          th Sem 2
+          th 1
+            sup st
+          th 2
+            sup nd
           th Summer
-          th Sem 1
-          th Sem 2
+          th 1
+            sup st
+          th 2
+            sup nd
           th Summer
-          th Sem 1
-          th Sem 2
+          th 1
+            sup st
+          th 2
+            sup nd
           th Summer        
           
       tbody

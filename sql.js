@@ -2,8 +2,8 @@ var mysql=require('mysql');
 var connection=mysql.createConnection({
   host:'localhost',
   user:'root',
-  password:'12345',
-  database:'regchula'
+  password:'',
+  database:'databaseproject'
 });
 connection.connect(function(error){
   if(!!error){
@@ -13,4 +13,14 @@ connection.connect(function(error){
   }
 });
 
-module.exports=connection;
+var pool = mysql.createPool({
+  host:'localhost',
+  user:'root',
+  password:'',
+  database:'databaseproject',
+  connectionLimit: 10
+});
+
+
+// module.exports=connection;
+module.exports=pool;
