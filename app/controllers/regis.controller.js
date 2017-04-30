@@ -1,11 +1,14 @@
 var pool=require('../../sql');
 var dialog=require('dialog');
+var newuser=require('../routes/User');
+require('./login.controller');
 
 exports.search=function(req,res){
   var by=req.body.by;
   var select=req.body.select;
   var order=req.body.order;
   var year=req.body.year;
+  console.log(newuser.user.instructorId+' Registrar');
   console.log('Search key: '+by);
   console.log('Search choice: '+select);
   console.log('Order choice: '+order);
