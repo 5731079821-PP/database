@@ -3,7 +3,7 @@ var connection=mysql.createConnection({
   host:'localhost',
   user:'root',
   password:'',
-  database:'databaseproject'
+  database:'regchula'
 });
 connection.connect(function(error){
   if(!!error){
@@ -17,7 +17,7 @@ var pool = mysql.createPool({
   host:'localhost',
   user:'root',
   password:'',
-  database:'databaseproject',
+  database:'regchula',
   connectionLimit: 10
 });
 

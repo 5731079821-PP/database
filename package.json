@@ -16,6 +16,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.0",
     "passport": "latest",
-    "passport-local": "latest"
+    "passport-local": "latest",
+    "string-to-json": "^0.1.0"
   }
 }
