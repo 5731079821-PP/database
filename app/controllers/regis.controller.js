@@ -8,6 +8,8 @@ exports.search=function(req,res){
   var select=req.body.select;
   var order=req.body.order;
   var year=req.body.year;
+  var grade=req.body.grade;
+  console.log('insID : '+newuser.userinstructorId);
   console.log('Search key: '+by);
   console.log('select choice: '+select);
   console.log('Order choice: '+order);
@@ -32,7 +34,7 @@ exports.search=function(req,res){
         }
       }
     }else if(select == 'assist'){
-      query += ' where s.instructorid = '+newuser.userinstructorId;
+      query += ' where s.instructorid = '+/*session instructorid*/ + '101010';
     }else if(select == 'year'){
       if(year == undefined){
         dialog.err('PLEASE SELECT YEAR', 'warning', function (err) {
@@ -76,8 +78,9 @@ exports.search=function(req,res){
 
         '"y'+(aobj.year-year)+'_'+sem[aobj.term-1]+'": '+aobj.GPA;
       var prevyear = aobj.year;
+      console.log('i='+i);
       for(var j=i+1; j<rows.length; j++){
-        console.log('in if : '+j);
+        console.log('in if : i='+i+' j='+j);
         bobj=rows[j];
         if(aobj.sid == bobj.sid){
           if(prevyear != bobj.year){
@@ -91,7 +94,7 @@ exports.search=function(req,res){
             '"y'+(bobj.year-year)+'_'+sem[bobj.term-1]+'": '+bobj.GPA;
         }else{
           // console.log(' in else ');
-          i=j;
+          i=j-1;
           var fillyear=rows[j-1].year-aobj.year;
           fillyear+=2;
           // console.log(' fillyear '+fillyear);
@@ -140,6 +143,7 @@ exports.rend=function(req,res){
     var prevID;
     var year;
     var sem=['1st','2nd','S'];
+    console.log(rows.length);
     for(var i=0; i<rows.length; i++){
       aobj=rows[i];
       year=aobj.year-1;
@@ -154,7 +158,9 @@ exports.rend=function(req,res){
 
         '"y'+(aobj.year-year)+'_'+sem[aobj.term-1]+'": '+aobj.GPA;
       var prevyear = aobj.year;
+      console.log('i='+i);
       for(var j=i+1; j<rows.length; j++){
+        console.log('in if : i='+i+' j='+j);
         bobj=rows[j];
         if(aobj.sid == bobj.sid){
           if(prevyear != bobj.year){
@@ -168,7 +174,7 @@ exports.rend=function(req,res){
             '"y'+(bobj.year-year)+'_'+sem[bobj.term-1]+'": '+bobj.GPA;
         }else{
           // console.log(' in else ');
-          i=j;
+          i=j-1;
           var fillyear=rows[j-1].year-aobj.year;
           fillyear+=2;
           // console.log(' fillyear '+fillyear);
@@ -183,7 +189,7 @@ exports.rend=function(req,res){
           break;
         }
       }
-      if(i == rows.length-1){
+      if(i == rows.length-1 ){
         for(var fillyear=(rows[i].year-year)+1; fillyear<=4; fillyear++){
           jsonstr += ','+
             '"y'+(fillyear)+'_'+sem[0]+'": "'+'-'+'",'+
@@ -202,5 +208,5 @@ exports.rend=function(req,res){
       student : tojsonstr,
       errormsg : errormsg
     });
-  });
+  })
 };
