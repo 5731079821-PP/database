@@ -20,8 +20,25 @@ exports.search=function(req,res){
   'inner join paticipate p on a.activityid = p.activityId '+
   'inner join student s on s.sid= p.sid';
 
-  if(select == 'assist'){
-    query += ' inner join instructor i on s.instructorid=i.instructorId where i.instructorId = '+newuser.userinstructorId;
+  if(select == 'id'){
+    query += ' where s.sid like "%'+by+'%"';
+  }else if(select == 'name'){
+    if(by == ''){
+      dialog.err('PLEASE FILL NAME IN THE BOX', 'warning', function (err) {
+        return;
+      });
+      return;
+    }else {
+      if(by.indexOf(' ')>-1){// fname and lname
+        fname = by.substr(0, by.indexOf(' '));
+        lname = by.substr(by.lastIndexOf(' ')+1,by.length);
+        query += ' where s.fname = "'+fname+'" and s.lname like "%'+lname+'%" ';
+      }else{
+        query += ' where s.fname like "%'+by+'%" ';
+      }
+    }
+  }else if(select == 'assist'){
+    query += ' inner join instructor i on s.instructorid=i.instructorId where i.instructorId = '+newuser.user.instructorId;
   }else if(select == 'date'){
     if(date == ''){
       dialog.err('PLEASE CHOOSE DATE', 'warning', function (err) {
@@ -31,12 +48,10 @@ exports.search=function(req,res){
     else {
       query += ' where date = "'+date+'" ';
     }
-  }
-
-  if(by != '') {
-    if(query.indexOf('where') == -1) query +=' where ';
-    else query+=' or ';
-    query += ' p.sid = "'+by+'" '+' or a.name = "'+by+'" '+' or s.fname="'+by+'" '+' or a.assistant="'+by+'" ';
+  }else if(select == 'activity'){
+    query += ' where a.name like "%'+by+'%"';
+  }else if(select == ' projectAssist'){
+    query += ' where a.assistant like "%'+by+'%"';
   }
 
   if(type!='' && type!=undefined){

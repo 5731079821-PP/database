@@ -2,6 +2,8 @@
 var async = require('async');
 var pool = require('../../sql');
 var dialog = require('dialog');
+var newuser=require('../routes/User');
+require('./login.controller');
 
 exports.search=function(req,res){
   var by=req.body.by;         //search
@@ -41,7 +43,7 @@ exports.search=function(req,res){
         }
       }else if(select == 'assist'){
         query += ' inner join instructor i on s.instructorid = i.instructorId '+
-        'where i.instructorId = ' + /*session instructorId*/ '101010';
+        'where i.instructorId = ' + newuser.user.instructorId;
         if(by != '') query += ' and (sid = ' + by + 'or name = ' + by + ')';
       }
 
@@ -56,7 +58,7 @@ exports.search=function(req,res){
       }
       else {
         console.log('   in else ');
-        query += ' inner join enroll e on s.sid = e.sId inner join course c on c.courseId = e.courseId where s.instructorid = 101010 and e.courseId = ' + course ; // query -- student enroll subject that the teacher teach
+        query += ' inner join enroll e on s.sid = e.sId inner join course c on c.courseId = e.courseId where s.instructorid = '+newuser.user.instructorId+' and e.courseId = ' + course ; // query -- student enroll subject that the teacher teach
       }
     }
   }
@@ -67,7 +69,7 @@ exports.search=function(req,res){
   }
   query = 'SELECT s.sid, s.fname, s.lname, s.GPAX FROM student s ' + query;
   console.log(query);
-  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId=101010";
+  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId="+newuser.user.instructorId;
   var row = [];
 
   var return_data = {};
@@ -123,7 +125,7 @@ exports.profile=function(req,res){
 
 exports.rend=function(req,res){
   var query2="SELECT sid, fname, lname, GPAX from student";
-  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId=101010";
+  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId="+newuser.user.instructorId;
   var row = [];
 
   var return_data = {};

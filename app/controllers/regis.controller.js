@@ -9,7 +9,7 @@ exports.search=function(req,res){
   var order=req.body.order;
   var year=req.body.year;
   var grade=req.body.grade;
-  console.log('insID : '+newuser.userinstructorId);
+  console.log('insID : '+newuser.user.instructorId);
   console.log('Search key: '+by);
   console.log('select choice: '+select);
   console.log('Order choice: '+order);
@@ -34,7 +34,7 @@ exports.search=function(req,res){
         }
       }
     }else if(select == 'assist'){
-      query += ' where s.instructorid = '+/*session instructorid*/ + newuser.userinstructorId;
+      query += ' where s.instructorid = '+/*session instructorid*/ newuser.user.instructorId;
     }else if(select == 'year'){
       if(year == undefined){
         dialog.err('PLEASE SELECT YEAR', 'warning', function (err) {

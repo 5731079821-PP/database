@@ -1,6 +1,8 @@
 var async = require('async');
 var pool = require('../../sql');
 var dialog = require('dialog');
+var newuser=require('../routes/User');
+require('./login.controller');
 
 exports.search=function(req,res){
   var by=req.body.by;
@@ -22,7 +24,7 @@ exports.search=function(req,res){
   }  else{
     if(select != 'type'){
       if(select == 'assist'){
-        query += ' where i.instructorId = ' + /*session instructorId*/ '101010';
+        query += ' where i.instructorId = ' + newuser.user.instructorId;
       }
       if(by != ''){
         if(select == 'assist') query += ' and (sid = ' + by + 'or name = ' + by + ')';
@@ -51,7 +53,7 @@ exports.search=function(req,res){
   }
   query = 'select s.sid, s.fname, s.lname, i.name from student s inner join instructor i on s.instructorid = i.instructorId' + query;
   console.log(query);
-  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId=101010";
+  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId="+newuser.user.instructorId;
   var row = [];
 
   var return_data = {};
