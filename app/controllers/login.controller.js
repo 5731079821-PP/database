@@ -1,4 +1,5 @@
 var connection=require('../../sql');
+var newuser=require('../routes/User');
 exports.login=function(req,res){
   res.render('login',{
   });
@@ -36,7 +37,7 @@ exports.authen=function(req,res){
     password: req.body.pass,
     status:req.body.status
     };
-  req.session.save();  
+  req.session.save();
   req.session.inID=data.instructorId;
   connection.query('SELECT password, user FROM login WHERE instructorId = ?', data.instructorId,function(err,result){
     //console.log('goi');
@@ -47,6 +48,8 @@ exports.authen=function(req,res){
           sms: 'Incorrect Instructor ID or Password!'
         });
     }else{
+      newuser.setUser(data.instructorId);
+      console.log(newuser.user);
       res.render('layout',{
         User: 'ID: '+req.session.inID+'  ',
         subtitle: 'Overview'
@@ -55,6 +58,7 @@ exports.authen=function(req,res){
   });
 };
 exports.logout=function(req,res){
+   newuser.delUser();
   req.session.destroy();
   res.render('login');//render signin.jade
 };
