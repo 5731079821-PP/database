@@ -18,22 +18,13 @@ block content
             label(for='goi2') GPAX of Student
         .col-sm-4(style='background-color:#abc9bd;height:300px')
           #goi3.ct-chart.ct-perfect-fourth
-            label(for='goi3') GPAX of Student
+            label(for='goi3') Widthdraw Statistics
       .row(style='height:450px;')
         .col-sm-6(style='background-color:#d7a29e; height:450px')
           #goi4.ct-chart.ct-perfect-fourth
             label(for='goi4') GPAX of Student
         .col-sm-6(style='background-color:#e8d8bf; height:450px')
-          div(style='text-align:center')
-            h3 Report                        
-            p Gender                       
-            p --Female 42%
-            p --Male 55%
-            p --Unknown 3% 
-            p #Registrar Record of '5731111121'
-            p #Behave Score of Year = '3' 
-            p #GPAX of Year 4
-            p #Nonacademic Activity = 'SportDay' 
+          img(src='/img/carlen.png', alt='carlendar', width='500px', height='450px')
           
         
         
@@ -61,19 +52,15 @@ block content
       });
       //goi3
       new Chartist.Bar('#goi3', {
-        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        labels: ['Year1', 'Year2', 'Year3', 'Year4'],
         series: [
-          [800000, 1200000, 1400000, 1300000],
-          [200000, 400000, 500000, 300000],
-          [100000, 200000, 400000, 600000]
+          [20,10 , 5,2],
+          [15, 20, 5, 1],
+          [2, 5, 4, 1]
         ]
       }, {
         stackBars: true,
-        axisY: {
-          labelInterpolationFnc: function(value) {
-            return (value / 1000) + 'k';
-          }
-        }
+      
       }).on('draw', function(data) {
         if(data.type === 'bar') {
           data.element.attr({
