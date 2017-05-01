@@ -135,26 +135,27 @@ block content
           th Summer        
           
       tbody
-        tr
-          td 1
-          td Lorem
-          td 1234567
-          td 5.5
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td sit
-          td
-            a(href='record')
-              span.glyphicon.glyphicon-list-alt(aria-hidden='true')
-          
+        each stu in student
+          tr
+            td 1
+            td=stu.fname+' '+stu.lname
+            td=stu.sid
+            td=stu.GPAX
+            td=stu.y1_1st
+            td=stu.y1_2nd
+            td=stu.y1_S
+            td=stu.y2_1st
+            td=stu.y2_2nd
+            td=stu.y2_S
+            td=stu.y3_1st
+            td=stu.y3_2nd
+            td=stu.y3_S
+            td=stu.y4_1st
+            td=stu.y4_2nd
+            td=stu.y4_S
+            td
+              a(href='record')
+                span.glyphicon.glyphicon-list-alt(aria-hidden='true')
+            
           
       
