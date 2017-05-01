@@ -14,27 +14,44 @@ exports.search=function(req,res){
   console.log('Course choice: '+course);
   var query = '';
   if(select == 'undefined'){
-  }else if(select=='all'){
-    if(by != '')
-    query += 'WHERE  s.fname = "' + by + '" or s.sid = "' + by +'"' ;
-  }  else{
+  } else{
     if(select != 'course'){
-      if(select == 'assist'){
+      if(select == 'sid'){
+        if(by == ''){
+          dialog.err('PLEASE FILL STUDENT ID IN THE BOX', 'warning', function (err) {
+            return;
+          });
+          return;
+        }
+        else query += ' where sid like '+'"%'+by+'%"';
+      }else if(select == 'name'){
+        if(by == ''){
+          dialog.err('PLEASE FILL NAME IN THE BOX', 'warning', function (err) {
+            return;
+          });
+          return;
+        }else {
+          if(by.indexOf(' ')>-1){// fname and lname
+            fname = by.substr(0, by.indexOf(' '));
+            lname = by.substr(by.lastIndexOf(' ')+1,by.length);
+            query += ' where fname = "'+fname+'" and lname like "%'+lname+'%" ';
+          }else{
+            query += ' where fname like "%'+by+'%" ';
+          }
+        }
+      }else if(select == 'assist'){
         query += ' inner join instructor i on s.instructorid = i.instructorId '+
         'where i.instructorId = ' + /*session instructorId*/ '101010';
+        if(by != '') query += ' and (sid = ' + by + 'or name = ' + by + ')';
       }
-      if(by != ''){
-        if(select == 'assist') query += ' and (sid = ' + by + 'or name = ' + by + ')';
-        else query += 'WHERE ' + select + ' = ' + by;
-      }
+
     }
     else { // select : course
       console.log('course : '+ course);
       if(course == undefined)  {
         dialog.err('PLEASE SELECT COURSE', 'warning', function (err) {
           return;
-        })
-        console.log(' in if == undefined');
+        });
         return;
       }
       else {
