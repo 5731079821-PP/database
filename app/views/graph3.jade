@@ -12,22 +12,37 @@ block content
       .row(style='height:300px;')
         .col-sm-4(style='background-color:#595a6d; height:300px;')
           #goi.ct-chart.ct-perfect-fourth
+            label(for='goi') Gender
         .col-sm-4(style='background-color:#9aa099;height:300px')
           #goi2.ct-chart.ct-perfect-fourth
+            label(for='goi2') GPAX of Student
         .col-sm-4(style='background-color:#abc9bd;height:300px')
           #goi3.ct-chart.ct-perfect-fourth
+            label(for='goi3') GPAX of Student
       .row(style='height:450px;')
         .col-sm-6(style='background-color:#d7a29e; height:450px')
           #goi4.ct-chart.ct-perfect-fourth
+            label(for='goi4') GPAX of Student
         .col-sm-6(style='background-color:#e8d8bf; height:450px')
+          div(style='text-align:center')
+            h3 Report                        
+            p Gender                       
+            p --Female 42%
+            p --Male 55%
+            p --Unknown 3% 
+            p #Registrar Record of '5731111121'
+            p #Behave Score of Year = '3' 
+            p #GPAX of Year 4
+            p #Nonacademic Activity = 'SportDay' 
+          
         
         
   
     script.
       //goi
       var chart = new Chartist.Pie('#goi', {
-        series: [10, 20, 50, 20, 5, 50, 15],
-        labels: ['one', 2, 3, 4, 5, 6, 7]
+        series: [42, 55, 3],
+        labels: ['Female','Male', 'Unknown']
       }, {
         donut: true,
         showLabel: true,
@@ -36,9 +51,9 @@ block content
       });
       //goi2
       new Chartist.Line('#goi2', {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8],
+        labels: [1,2,3,4],
         series: [
-          [5, 9, 7, 8, 5, 3, 5, 4]
+          [1,4,8,2]
         ]
       }, {
         low: 0,
