@@ -103,5 +103,18 @@ exports.rend=function(req,res){
  });
 };
 exports.miss=function(req,res){
-  res.render('miss');
-}
+  var id=req.param('id');
+  console.log(id);
+  var query = 'select a.courseId, a.reason, a.semester, a.year from absent a where a.sid = '+ id+' order by a.year and a.semester asc ';
+  console.log(query);
+  pool.query(query, function(err, rows){
+    if(err) console.error('QUERY ERROR : indiv absent table');
+    var mes = '';
+    if(rows='') mes='never absent';
+    res.render('miss',{
+      id: id,
+      student: rows,
+      mes: mes
+    });
+  });
+};

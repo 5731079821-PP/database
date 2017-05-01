@@ -7,6 +7,7 @@ module.exports=function(app){
   app.get('/record',regis.record);
   app.post('/registrar',regis.search);
   app.get('/registrar',regis.rend);
+	app.get('/record/pdf',regis.recordPDF);
 
 
 };

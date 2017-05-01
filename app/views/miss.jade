@@ -25,7 +25,7 @@ html
       table(style='border-collapse: collapse; ', align='center')  
         tr
           td 
-            h2 Student ID: Put it Here
+            h2 Student ID: #{id}
           td
             center
               i.fa.fa-file-pdf-o(style='font-size:40px; color:red;')
@@ -33,16 +33,18 @@ html
       // TABLE
       div(style='margin-top: 20px;')
         table(style='border-collapse: collapse; border: 1px solid #000;', align='center')
-          tr(style='background-color: rgb(255,210,227); border: 1px solid #000; border-bottom-color: white')
-            td #
-            td Reason           
-            td Course ID 
-            td Semester
-            td Year
-          tr.view
-            td  1
-            td  sick
-            td  2211000
-            td  1 
-            td  2557 
-          
+          thead
+            tr(style='background-color: rgb(255,210,227); border: 1px solid #000; border-bottom-color: white')
+              th Reason           
+              th Course ID 
+              th Semester
+              th Year
+          tbody
+            each stu in student
+              tr.view
+                td=stu.reason
+                td=stu.courseId
+                td=stu.semester
+                td=stu.year
+                
+    h4(style='color:#000; text-align:center;') #{mes}          

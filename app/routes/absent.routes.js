@@ -7,4 +7,5 @@ module.exports=function(app){
   app.post('/absent',absent.search);
   app.get('/absent',absent.rend);
   app.get('/miss',absent.miss);
+	app.get('/absent/pdf',absent.absentPDF)
 };

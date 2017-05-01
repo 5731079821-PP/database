@@ -26,7 +26,7 @@ html
       table(style='border-collapse: collapse; ', align='center')
         tr
           td 
-            h2 Student ID:
+            h2 #{sid}
         tr
           td
             center
@@ -35,17 +35,17 @@ html
       // TABLE
       div(style='margin-top: 20px;')
         table(style='border-collapse: collapse; border: 1px solid #000;', align='center')
-          tr(style='background-color: rgb(255,210,227); border: 1px solid #000; border-bottom-color: white')
-            td #
-            td Rule ID 
-            td Rule Name
-            td Date
-            td Time
-            td Balance Score
-          tr.view
-            td  1
-            td  5
-            td  Run
-            td  today
-            td  7 
-            td 50
+          thead
+            tr(style='background-color: rgb(255,210,227); border: 1px solid #000; border-bottom-color: white')
+              td Rule ID 
+              td Rule Name
+              td Date
+              td Time
+          tbody
+            each stu in student
+              tr.view
+                td=stu.ruleId
+                td=stu.name
+                td=stu.date
+                td=stu.time
+    h4(style='color:#000; text-align:center;') #{total}

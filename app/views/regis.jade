@@ -95,7 +95,6 @@ block content
     table.table.table-striped
       thead
         tr
-          th(style='text-align:center',rowspan='2') #
           th(style='text-align:center',rowspan='2') Student Name
           th(style='text-align:center',rowspan='2') Student ID
           th(style='text-align:center',rowspan='2') GPAX
@@ -137,7 +136,6 @@ block content
       tbody
         each stu in student
           tr
-            td 1
             td=stu.fname+' '+stu.lname
             td=stu.sid
             td=stu.GPAX

@@ -127,5 +127,19 @@ exports.rend=function(req,res){
 
 exports.indivScore=function(req,res){
   var id = req.param('id');
-  res.render('bscore');
+  var balance = req.param('bescore');
+  console.log('id : '+id+' -- balance : '+ balance);
+  var query = 'select r.ruleId, r.name, DATE_FORMAT(t.date,"%b %e, %Y") as date, t.time from time t inner join rule r on t.ruleId=r.ruleId where t.sid='+ id;
+
+  pool.query( query, function(err, rows){
+    if(err) console.error('QUERY ERROR : show indiv behaviorScore');
+    var total='balance score : '+balance;
+    var sid = 'Student ID : ';
+    sid += id;
+    res.render('bscore',{
+      sid: sid,
+      student: rows,
+      total: total
+    });
+  });
 };

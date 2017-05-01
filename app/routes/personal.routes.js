@@ -8,5 +8,7 @@ module.exports=function(app){
   app.get('/allpersonal', personal.rend);
   app.post('/allpersonal',personal.search);
   app.get('/profile',personal.profile);
+  app.get('/allpersonal/pdf',personal.allpersonalPDF);
+  app.get('/personal/pdf',personal.personalPDF);
 
 };

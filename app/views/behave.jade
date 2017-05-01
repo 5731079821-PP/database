@@ -75,29 +75,20 @@ block content
     table.table.table-striped
       thead
         tr
-          th #
           th Student ID
           th Student Name
           th Score
           th GPAX
           th History
       tbody
-        tr
-          td 1
-          td 55555555
-          td Your father
-          td 100
-          td GPAX
-          td
-            a(href='bscore')
-              span.glyphicon.glyphicon-list-alt(aria-hidden='true')
+        
         each stu in student
           tr
-            td
             td=stu.sid
             td=stu.fname+' '+stu.lname
             td=stu.behaviorScore
             td=stu.GPAX
             td 
-              a(href="#{'bscore?id='+stu.sid}") 
+              a(href="#{'bscore?id='+stu.sid+'&bescore='+stu.behaviorScore}") 
                 span.glyphicon.glyphicon-list-alt
+    h3(style='color:#ff0000; text-align:center;') #{errormsg}
