@@ -4,6 +4,8 @@ var pool = require('../../sql');
 var dialog = require('dialog');
 var newuser=require('../routes/User');
 require('./login.controller');
+var fs = require("fs");
+var report = require("jade-reporting");
 
 exports.search=function(req,res){
   var by=req.body.by;
@@ -79,6 +81,7 @@ exports.home=function(req,res){
     subtitle: 'Overview'
   });
 };
+
 exports.rend=function(req,res){
   var query='select a.name, a.type, a.prize, p.sid, a.assistant, DATE_FORMAT(a.date,"%b %e, %Y") as date , s.fname, s.lname from activity a '+
   'inner join paticipate p on a.activityid = p.activityId '+
@@ -93,4 +96,42 @@ exports.rend=function(req,res){
     });
   });
   // res.render('act');
+};
+
+exports.activityPDF=function(req,res){
+  connection.query('select P.activityId, A.name ,A.type,A.prize,P.sid,A.assistant,A.date FROM paticipate P , activity A where P.activityId = A.activityid',function(err, results){
+    if(err) {
+      console.log('QUERY ERROR : personal table with search apply');
+    }else{
+
+		var _data = {
+			activity: results
+		};
+
+
+		var _config = {
+		  margin: {
+			left: 15,
+			right: 15,
+			top: 15,
+			bottom: 15
+		  }
+		};
+
+		var filePath = "./storages/pdf/activity.pdf";
+		var template = __dirname + "\\..\\views\\activity_pdf.jade";
+
+		report.generate(template, filePath, _data, _config, function(err){
+			if(err){
+				console.log(err);
+				return false;
+			}
+
+			fs.readFile(filePath, function(err, pdf) {
+				res.contentType("application/pdf");
+				res.send(pdf);
+			});
+		});
+	}
+  });
 };

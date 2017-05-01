@@ -2,6 +2,8 @@ var pool=require('../../sql');
 var dialog=require('dialog');
 var newuser=require('../routes/User');
 require('./login.controller');
+var fs = require("fs");
+var report = require("jade-reporting");
 
 exports.search=function(req,res){
   var by=req.body.by;
@@ -132,6 +134,9 @@ exports.search=function(req,res){
 };
 
 exports.record=function(req,res){
+  var id = req.param('id');
+  var queryinfo = 'select s.fname, s.lname, s.gender, s.sid, s.enrollYear, d.departmentName, f.facultyName from student s inner join department d on s.departmentId = d.departmentId inner join faculty f on d.facultyId = f.facultyId where s.sid = '+id;
+  var queryregis = 'select * from section s inner join course c on s.courseId=c.courseId ';
   res.render('record');
 };
 exports.rend=function(req,res){
@@ -209,4 +214,54 @@ exports.rend=function(req,res){
       errormsg : errormsg
     });
   })
+};
+
+exports.recordPDF=function(req,res){
+  pool.query('select distinct C.courseId ,E.sId,E.year,E.secId,E.grade,C.name,C.type,C.weight,S.note,STU.fname,STU.lname,STU.idNumber,STU.enrollYear,STU.dateOfBirth,STU.gender,STU.email,F.FacultyName,D.departmentName, A.term,A.GPA,A.GPAX,A.CA,A.CAX,A.CGX,A.GPX,A.CG from course C,enroll E , section S , academicrecord A , student STU,faculty F,department D where C.courseId = E.courseId and S.courseId = C.courseId and E.sId = STU.sid and E.term = A.term and E.year=A.year and A.sid = E.sId and E.secId = S.secId and STU.departmentId=D.departmentId and D.facultyId=F.facultyId and STU.sid = ?',req.query.sid,function(err, results){
+    if(err ) {
+      console.log('QUERY ERROR : gen pdf indiv regis');
+    }else{
+		console.log("length : " + results.length)
+
+		console.log(results)
+
+		var a = new Map();
+		for(var i=0;i<results.length;i++){
+			if(!a.get(results[i].year))
+				a.set(results[i].year,new Map());
+			if(!a.get(results[i].year).get(results[i].term))
+				a.get(results[i].year).set(results[i].term,[]);
+				a.get(results[i].year).get(results[i].term).push(results[i]);
+		}
+
+		var _data = {
+			student: results[0],
+			record: a
+		};
+
+		var _config = {
+		  margin: {
+			left: 15,
+			right: 15,
+			top: 15,
+			bottom: 15
+		  }
+		};
+
+		var filePath = "./storages/pdf/record.pdf";
+		var template = __dirname + "\\..\\views\\record_pdf.jade";
+
+		report.generate(template, filePath, _data,_config, function(err){
+			if(err){
+				console.log(err);
+				return false;
+			}
+
+			fs.readFile(filePath, function(err, pdf) {
+				res.contentType("application/pdf");
+				res.send(pdf);
+			});
+		});
+	}
+  });
 };

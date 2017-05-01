@@ -4,6 +4,8 @@ var pool = require('../../sql');
 var dialog = require('dialog');
 var newuser=require('../routes/User');
 require('./login.controller');
+var fs = require("fs");
+var report = require("jade-reporting");
 
 exports.search=function(req,res){
   var by=req.body.by;         //search
@@ -157,5 +159,85 @@ exports.rend=function(req,res){
       subj: rows.table1,
       errormsg: errormsg
     })
+  });
+};
+
+exports.allpersonalPDF=function(req,res){
+  connection.query('SELECT * FROM student',function(err, results){
+    if(err) {
+      console.log('QUERY ERROR : personal table with search apply');
+    }else{
+
+		var _data = {
+			student: results
+		};
+
+
+		var _config = {
+		  margin: {
+			left: 15,
+			right: 15,
+			top: 15,
+			bottom: 15
+		  }
+		};
+
+		var filePath = "./storages/pdf/allpersonal.pdf";
+		var template = __dirname + "\\..\\views\\allpersonal_pdf.jade";
+
+		report.generate(template, filePath, _data, _config, function(err){
+			if(err){
+				console.log(err);
+				return false;
+			}
+
+			fs.readFile(filePath, function(err, pdf) {
+				res.contentType("application/pdf");
+				res.send(pdf);
+			});
+		});
+	}
+  });
+};
+
+exports.personalPDF=function(req,res){
+
+  connection.query('SELECT * FROM student WHERE sid = ?',req.query.sid, function(err, results){
+    if(err) {
+      console.log('QUERY ERROR : personal table with search apply');
+    }else{
+
+		var _data = {
+			student: results[0]
+		};
+
+		console.log(_data)
+
+		var _config = {
+		  margin: {
+			left: 15,
+			right: 15,
+			top: 15,
+			bottom: 15
+		  }
+		};
+
+		var filePath = "./storages/pdf/personal.pdf";
+		var template = __dirname + "\\..\\views\\personal_pdf.jade";
+
+		report.generate(template, filePath, _data, _config, function(err){
+			if(err){
+				console.log(err);
+				return false;
+			}
+
+			fs.readFile(filePath, function(err, pdf) {
+				res.contentType("application/pdf");
+				res.send(pdf);
+			});
+		});
+
+
+	}
   });
 };

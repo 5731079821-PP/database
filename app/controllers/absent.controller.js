@@ -3,6 +3,8 @@ var pool = require('../../sql');
 var dialog = require('dialog');
 var newuser=require('../routes/User');
 require('./login.controller');
+var fs = require("fs");
+var report = require("jade-reporting");
 
 exports.search=function(req,res){
   var by=req.body.by;
@@ -88,6 +90,7 @@ exports.search=function(req,res){
     })
   });
 };
+
 exports.rend=function(req,res){
   pool.query('select sid, fname, lname, instructor.name from student inner join instructor on student.instructorid = instructor.instructorId', function(err, rows, fields){
     if(err) console.error('QUERY ERROR : absent table');
@@ -102,6 +105,7 @@ exports.rend=function(req,res){
    });
  });
 };
+
 exports.miss=function(req,res){
   var id=req.param('id');
   console.log(id);
@@ -116,5 +120,42 @@ exports.miss=function(req,res){
       student: rows,
       mes: mes
     });
+  });
+};
+
+exports.absentPDF=function(req,res){
+  connection.query('select STU.sid , STU.fname , STU.lname,STU.GPAX,STA.detail,STU.email from student STU , status STA where STU.sid = STA.sid and STU.GPAX < 2.00;',function(err, results){
+    if(err) {
+      console.log('QUERY ERROR : personal table with search apply');
+    }else{
+
+		var _data = {
+			absent: results
+		};
+
+		var _config = {
+		  margin: {
+			left: 15,
+			right: 15,
+			top: 15,
+			bottom: 15
+		  }
+		};
+
+		var filePath = "./storages/pdf/absent.pdf";
+		var template = __dirname + "\\..\\views\\absent_pdf.jade";
+
+		report.generate(template, filePath, _data, _config, function(err){
+			if(err){
+				console.log(err);
+				return false;
+			}
+
+			fs.readFile(filePath, function(err, pdf) {
+				res.contentType("application/pdf");
+				res.send(pdf);
+			});
+		});
+	}
   });
 };

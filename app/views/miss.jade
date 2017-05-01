@@ -28,7 +28,9 @@ html
             h2 Student ID: #{id}
           td
             center
-              i.fa.fa-file-pdf-o(style='font-size:40px; color:red;')
+              //- a(href="#{'miss?id='+stu.sid}") 
+              a(href="'/absent/pdf?sid='+#{id}}")
+                i.fa.fa-file-pdf-o(style='font-size:40px; color:red;')
           
       // TABLE
       div(style='margin-top: 20px;')
