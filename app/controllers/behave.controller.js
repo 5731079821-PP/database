@@ -16,11 +16,30 @@ exports.search=function(req,res){
   console.log('range of score: '+score);
   var query = '';
   if(select == 'undefined'){
-    if(by != '')
-      query += ' WHERE  s.fname = "' + by + '" or s.sid = "' + by +'"' ;
-  }else if(select=='all'){
-    if(by != '')
-    query += ' WHERE  s.fname = "' + by + '" or s.sid = "' + by +'"' ;
+    //do noting
+  }else if(select == 'id'){
+    if(by == ''){
+      dialog.err('PLEASE FILL STUDENT ID IN THE BOX', 'warning', function (err) {
+        return;
+      });
+      return;
+    }
+    else query += ' where sid like '+'"%'+by+'%"';
+  }else if(select == 'name'){
+    if(by == ''){
+      dialog.err('PLEASE FILL NAME IN THE BOX', 'warning', function (err) {
+        return;
+      });
+      return;
+    }else {
+      if(by.indexOf(' ')>-1){// fname and lname
+        fname = by.substr(0, by.indexOf(' '));
+        lname = by.substr(by.lastIndexOf(' ')+1,by.length);
+        query += ' where fname = "'+fname+'" and lname like "%'+lname+'%" ';
+      }else{
+        query += ' where fname like "%'+by+'%" ';
+      }
+    }
   }else if(select == 'score'){
     var num1, num2;
     by = by.trim();
@@ -43,32 +62,11 @@ exports.search=function(req,res){
       }
       query += " where s.behaviorScore >= " + num1 +" and s.behaviorScore <= " + num2;
     }
-  }  else{
-    // if(select != 'type'){
-      if(select == 'assist'){
+  } else if(select == 'assist'){
         query += ' where i.instructorId = ' + /*session instructorId*/ '101010';
-      }
-
-      if(by != ''){
-        if(select == 'assist') query += ' and (sid = ' + by + 'or name = ' + by + ')';
-        else query += ' WHERE ' + select + ' = ' + by;
-      }
-    // }
-    // else { // type was selected
-    //   console.log('type : '+ type);
-    //   if(type == undefined)  {
-    //     dialog.err('PLEASE SELECT TYPE', 'warning', function (err) {
-    //       return;
-    //     })
-    //     console.log(' in if == undefined');
-    //     return;
-    //   }
-    //   else {
-    //     console.log('   in else ');
-    //     query += ' inner join status ss on ss.sid=s.sid where ss.type = "' +type+ '"'; // query -- student enroll subject that the teacher teach
-    //   }
-    // }
+          if(by != '') query += ' and name = "'+by+'"';
   }
+
   if(order == 'a'){
     query += ' ORDER BY sid ASC';
   }else if(order == 'd'){
@@ -76,7 +74,7 @@ exports.search=function(req,res){
   }
   query = 'select s.sid, s.fname, s.lname, s.behaviorScore, GPAX from student s inner join instructor i on s.instructorId=i.instructorId' + query;
   console.log(query);
-  var query1="select * from instructor i inner join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId=101010";
+  var query1="select * from instructor i left join teach t on i.instructorId=t.instructorId inner join course c on c.courseId=t.courseId where i.instructorId=101010";
   var row = [];
 
   var return_data = {};

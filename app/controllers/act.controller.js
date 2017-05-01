@@ -2,6 +2,8 @@
 var async = require('async');
 var pool = require('../../sql');
 var dialog = require('dialog');
+var newuser=require('../routes/User');
+require('./login.controller');
 
 exports.search=function(req,res){
   var by=req.body.by;
@@ -19,7 +21,7 @@ exports.search=function(req,res){
   'inner join student s on s.sid= p.sid';
 
   if(select == 'assist'){
-    query += ' inner join instructor i on s.instructorid=i.instructorId where i.instructorId = 101010 ';
+    query += ' inner join instructor i on s.instructorid=i.instructorId where i.instructorId = '+newuser.userinstructorId;
   }else if(select == 'date'){
     if(date == ''){
       dialog.err('PLEASE CHOOSE DATE', 'warning', function (err) {
