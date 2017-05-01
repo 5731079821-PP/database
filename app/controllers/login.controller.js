@@ -1,7 +1,7 @@
 var connection=require('../../sql');
 var newuser=require('../routes/User');
 exports.login=function(req,res){
-  res.render('graph3',{
+  res.render('login',{
   });
 };
 exports.signin=function(req,res){
@@ -50,7 +50,7 @@ exports.authen=function(req,res){
     }else{
       newuser.setUser(data.instructorId);
       console.log(newuser.user);
-      res.render('graph1',{
+      res.render('graph3',{
         User: 'ID: '+req.session.inID+'  ',
         subtitle: 'Overview'
       }); //render layout.jade /overview path
