@@ -22,7 +22,7 @@ exports.create=function(req,res){
     connection.query('INSERT INTO login SET ?', data, function(err, result) {
       console.log(result);
     });
-      res.render('layout');//render layout.jade
+      res.render('login');//render login.jade
   }else{//if new user->insert data into login table
         res.render('signin',{
           sms:'You already have an account!'
@@ -50,7 +50,7 @@ exports.authen=function(req,res){
     }else{
       newuser.setUser(data.instructorId);
       console.log(newuser.user);
-      res.render('layout',{
+      res.render('graph1',{
         User: 'ID: '+req.session.inID+'  ',
         subtitle: 'Overview'
       }); //render layout.jade /overview path
