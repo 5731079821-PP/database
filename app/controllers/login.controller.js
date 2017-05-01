@@ -1,7 +1,7 @@
 var connection=require('../../sql');
 var newuser=require('../routes/User');
 exports.login=function(req,res){
-  res.render('login',{
+  res.render('graph3',{
   });
 };
 exports.signin=function(req,res){

@@ -2,7 +2,7 @@ var connection=require('../../sql');
 var newuser=require('../routes/User');
 require('./login.controller');
 exports.overview=function(req,res){
-  res.render('graph1',{
+  res.render('graph3',{
     User: 'ID: '+req.session.inID+'  ',
     subtitle: 'Overview'
   });
